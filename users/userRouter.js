@@ -5,12 +5,6 @@ const router = express.Router();
 const User = require('./userDb');
 const Post = require('../posts/postDb');
 
-const dummy_users = [
-  { id: 1, name: 'Shaun' },
-  { id: 2, name: 'Megan' },
-  { id: 3, name: 'Pere' },
-];
-
 router.post('/', validateUser, (req, res) => {
   User.insert(req.body)
     .then(user => {
@@ -35,9 +29,6 @@ router.post('/:id/posts', [validateUserId, validatePost], (req, res) => {
 });
 
 router.get('/', (req, res) => {
-
-  res.status(200).json(dummy_users);
-
   User.get()
     .then(users => {
       if (users) {
